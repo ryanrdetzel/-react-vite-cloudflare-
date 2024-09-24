@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Button } from "@/components/ui/button";
 
 function App() {
   useEffect(() => {
@@ -19,6 +20,7 @@ function App() {
     <>
       <h1 className="text-3xl font-bold underline">
         Basic React Vite Tailwind App
+        <Button>Click me</Button>
       </h1>
     </>
   );
