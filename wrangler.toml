@@ -1,0 +1,4 @@
+name = "react-vite-cloudflare-template"
+pages_build_output_dir = "./dist"
+compatibility_date = "2024-06-01"
+
