@@ -1,11 +1,14 @@
-import { apiFetch } from "../utils/api";
+import { useApiFetch } from "../hooks/useApiFetch";
+import { useQuery } from "@tanstack/react-query";
 
-export const getExample = async () => {
-  try {
-    const response = await apiFetch("/api");
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Error fetching todo:", error);
-  }
-};
+export function useExampleQuery() {
+  const { fetchWithToken } = useApiFetch();
+
+  return useQuery({
+    queryKey: ["example"],
+    queryFn: async () => {
+      const response = await fetchWithToken("/api/example");
+      return response.json();
+    },
+  });
+}

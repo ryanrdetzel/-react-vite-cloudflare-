@@ -1,10 +1,27 @@
-import { getExample } from "./apis/example";
-import { useQuery } from "@tanstack/react-query";
+import { useExampleQuery } from "./apis/example";
+
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  UserButton,
+} from "@clerk/clerk-react";
+
+function Header() {
+  return (
+    <header>
+      <SignedOut>
+        <SignInButton />
+      </SignedOut>
+      <SignedIn>
+        <UserButton />
+      </SignedIn>
+    </header>
+  );
+}
+
 function App() {
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ["example"],
-    queryFn: getExample,
-  });
+  const { data, isLoading, isError } = useExampleQuery();
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -20,6 +37,7 @@ function App() {
 
   return (
     <>
+      <Header />
       <h1 className="text-3xl font-bold underline">
         Basic React Vite Tailwind App
       </h1>
