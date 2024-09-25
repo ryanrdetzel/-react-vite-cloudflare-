@@ -1,26 +1,31 @@
-import { useEffect } from "react";
-import { apiFetch } from "./utils/api";
-
+import { getExample } from "./apis/example";
+import { useQuery } from "@tanstack/react-query";
 function App() {
-  useEffect(() => {
-    const fetchTest = async () => {
-      try {
-        const response = await apiFetch("/api");
-        const data = await response.json();
-        console.log("Data:", data);
-      } catch (error) {
-        console.error("Error fetching todo:", error);
-      }
-    };
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["example"],
+    queryFn: getExample,
+  });
 
-    fetchTest();
-  }, []);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error loading data...</div>;
+  }
+
+  if (!data) {
+    return null;
+  }
 
   return (
     <>
       <h1 className="text-3xl font-bold underline">
         Basic React Vite Tailwind App
       </h1>
+      <ul>
+        <li>Name: {data.name}</li>
+      </ul>
     </>
   );
 }
