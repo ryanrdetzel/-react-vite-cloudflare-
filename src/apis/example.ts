@@ -2,7 +2,7 @@ import { apiFetch } from "../utils/api";
 
 export const getExample = async () => {
   try {
-    const response = await apiFetch("/api");
+    const response = await apiFetch("/api/example");
     const data = await response.json();
     return data;
   } catch (error) {
