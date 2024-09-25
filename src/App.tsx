@@ -1,18 +1,19 @@
 import { useEffect } from "react";
+import { apiFetch } from "./utils/api";
 
 function App() {
   useEffect(() => {
-    const fetchTodo = async () => {
+    const fetchTest = async () => {
       try {
-        const response = await fetch("/api/posts");
+        const response = await apiFetch("/api");
         const data = await response.json();
-        console.log("Todo:", data);
+        console.log("Data:", data);
       } catch (error) {
         console.error("Error fetching todo:", error);
       }
     };
 
-    fetchTodo();
+    fetchTest();
   }, []);
 
   return (
