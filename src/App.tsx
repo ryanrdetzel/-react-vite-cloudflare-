@@ -1,35 +1,24 @@
-import { useExampleQuery } from "./apis/example";
+import { useSessionQuery, CustomError } from "./apis/session";
+import { useNavigate } from "react-router-dom";
 
-import {
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  UserButton,
-} from "@clerk/clerk-react";
+import { useEffect } from "react";
 
-function Header() {
-  return (
-    <header>
-      <SignedOut>
-        <SignInButton />
-      </SignedOut>
-      <SignedIn>
-        <UserButton />
-      </SignedIn>
-    </header>
-  );
+interface SessionQueryResult {
+  data: object;
+  isLoading: boolean;
+  isError: boolean;
+  error: CustomError | null;
 }
 
 function App() {
-  const { data, isLoading, isError } = useExampleQuery();
+  const navigate = useNavigate();
+  const { data, isError, error } = useSessionQuery() as SessionQueryResult;
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (isError) {
-    return <div>Error loading data...</div>;
-  }
+  useEffect(() => {
+    if (isError && error?.status === 404) {
+      navigate("/new-user");
+    }
+  }, [isError, error, navigate]);
 
   if (!data) {
     return null;
@@ -37,7 +26,6 @@ function App() {
 
   return (
     <>
-      <Header />
       <h1 className="text-3xl font-bold underline">
         Basic React Vite Tailwind App
       </h1>

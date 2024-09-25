@@ -6,6 +6,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./error-page";
 import { ClerkProvider } from "@clerk/clerk-react";
+import NewUser from "./Pages/NewUser.tsx";
+import RootLayout from "./Components/RootLayout"; // Import the new layout component
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -17,8 +19,18 @@ const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <RootLayout />,
     errorElement: <ErrorPage />,
+    children: [
+      {
+        index: true,
+        element: <App />,
+      },
+      {
+        path: "new-user",
+        element: <NewUser />,
+      },
+    ],
   },
 ]);
 
