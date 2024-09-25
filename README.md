@@ -2,6 +2,9 @@
 
 A template repo that uses tailwindcss, react, vite, and typescript to create a basic app for Cloudflare Pages.
 
+Also includes
+- react-query
+
 ## Branches
 - w-shadcnui - Added shadcnui components
 
