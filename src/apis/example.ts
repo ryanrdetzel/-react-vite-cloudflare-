@@ -1,11 +1,5 @@
 import { apiFetch } from "../utils/api";
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query'
+
 export const getExample = async () => {
   try {
     const response = await apiFetch("/api");

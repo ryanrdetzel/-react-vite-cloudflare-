@@ -4,6 +4,7 @@ A template repo that uses tailwindcss, react, vite, and typescript to create a b
 
 Also includes
 - react-query
+- react-router
 
 ## Branches
 - w-shadcnui - Added shadcnui components
