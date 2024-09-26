@@ -4,7 +4,7 @@ function SignInPage() {
   return (
     <div className="flex justify-center items-center min-h-screen">
       <SignedOut>
-        <SignIn />
+        <SignIn fallbackRedirectUrl="/app" />
       </SignedOut>
     </div>
   );

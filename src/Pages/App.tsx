@@ -1,4 +1,4 @@
-import { useSessionQuery, CustomError } from "./apis/session";
+import { useSessionQuery, CustomError } from "../apis/session";
 import { useNavigate } from "react-router-dom";
 
 import { useEffect } from "react";
@@ -20,7 +20,7 @@ function App() {
 
   useEffect(() => {
     if (isError && error?.status === 401) {
-      navigate("/signin");
+      navigate("/app/signin");
     }
   }, [isError, error, navigate]);
 

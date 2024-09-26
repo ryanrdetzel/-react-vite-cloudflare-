@@ -12,7 +12,6 @@ export function useSessionQuery() {
     queryKey: ["session"],
     queryFn: async () => {
       const response = await fetchWithToken("/api/session");
-      console.log(response.status);
       if (!response.ok) {
         const error: CustomError = new Error(
           `HTTP error, status = ${response.status}`
@@ -23,11 +22,8 @@ export function useSessionQuery() {
       return response.json();
     },
     retry: (retryCount, error: CustomError) => {
-      if (
-        error instanceof Error &&
-        (error.status === 404 || error.status === 401)
-      ) {
-        return false; // Do not retry on 404
+      if (error instanceof Error && error.status === 401) {
+        return false; // Do not retry on 401
       }
       console.log(retryCount);
       return retryCount < 2;
