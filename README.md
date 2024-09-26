@@ -18,6 +18,17 @@ If you want to use shadcnui components, you can follow the steps below.
 ### Add shadui components 
 npx shadcn@latest add button
 
+## Clerk
+
+Create a new app in clerk and add the publishable key to the .env.local file
+
+```
+.env.local
+VITE_CLERK_PUBLISHABLE_KEY=
+```
+
+Need to also include a production key in the .env.production file.
+
 
 ## Config
 
