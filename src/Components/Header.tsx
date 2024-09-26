@@ -1,16 +1,8 @@
-import {
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  UserButton,
-} from "@clerk/clerk-react";
+import { SignedIn, UserButton } from "@clerk/clerk-react";
 
 function Header() {
   return (
     <header>
-      <SignedOut>
-        <SignInButton />
-      </SignedOut>
       <SignedIn>
         <UserButton />
       </SignedIn>

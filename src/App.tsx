@@ -3,8 +3,12 @@ import { useNavigate } from "react-router-dom";
 
 import { useEffect } from "react";
 
+type UserType = {
+  email: string;
+};
+
 interface SessionQueryResult {
-  data: object;
+  data: UserType;
   isLoading: boolean;
   isError: boolean;
   error: CustomError | null;
@@ -15,8 +19,8 @@ function App() {
   const { data, isError, error } = useSessionQuery() as SessionQueryResult;
 
   useEffect(() => {
-    if (isError && error?.status === 404) {
-      navigate("/new-user");
+    if (isError && error?.status === 401) {
+      navigate("/signin");
     }
   }, [isError, error, navigate]);
 
@@ -26,11 +30,9 @@ function App() {
 
   return (
     <>
-      <h1 className="text-3xl font-bold underline">
-        Basic React Vite Tailwind App
-      </h1>
+      <h1 className="text-3xl font-bold">Basic React Vite Tailwind App</h1>
       <ul>
-        <li>Name: {data.name}</li>
+        <li>Email: {data.email}</li>
       </ul>
     </>
   );
