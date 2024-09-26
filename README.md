@@ -6,8 +6,26 @@ Also includes
 - react-query
 - react-router
 
-## Branches
-- w-shadcnui - Added shadcnui components
+## Setup
+
+After Cloning:
+- Change the name in wrangler.toml
+
+  
+```
+npm install vite
+npm i
+```
+## Env
+
+Create a new app in clerk and add the publishable key to the .env.local file
+
+```
+.env.local
+VITE_CLERK_PUBLISHABLE_KEY=
+```
+
+Need to also include a production key in the .env.production file.
 
 ## Run dev mode locally 
 npx vite dev
@@ -18,16 +36,7 @@ If you want to use shadcnui components, you can follow the steps below.
 ### Add shadui components 
 npx shadcn@latest add button
 
-## Clerk
 
-Create a new app in clerk and add the publishable key to the .env.local file
-
-```
-.env.local
-VITE_CLERK_PUBLISHABLE_KEY=
-```
-
-Need to also include a production key in the .env.production file.
 
 
 ## Config
