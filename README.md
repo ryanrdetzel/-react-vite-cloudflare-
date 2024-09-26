@@ -51,6 +51,8 @@ Assuming you're running this with the api backend template you'll want to deploy
 You need a Cloudflare account and wrangler must be logged in
 
 Edit the project name in the wrangler.toml file first
+Make sure the vars section is filled out correctly.
+After you deploy the backend you'll need the correct API url in production env
 
 ```
 npx vite build
