@@ -1,8 +1,8 @@
-import { SignedOut, SignIn, useAuth } from "@clerk/clerk-react";
+import { SignedOut, SignUp, useAuth } from "@clerk/clerk-react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-function SignInPage() {
+function SignUpPage() {
   const { isSignedIn, isLoaded } = useAuth();
   const navigate = useNavigate();
 
@@ -19,10 +19,10 @@ function SignInPage() {
   return (
     <div className="flex justify-center items-center min-h-screen">
       <SignedOut>
-        <SignIn fallbackRedirectUrl="/app" />
+        <SignUp forceRedirectUrl="/app" />
       </SignedOut>
     </div>
   );
 }
 
-export default SignInPage;
+export default SignUpPage;

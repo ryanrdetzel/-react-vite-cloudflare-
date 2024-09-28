@@ -9,6 +9,7 @@ import { ClerkProvider } from "@clerk/clerk-react";
 import RootLayout from "./Components/RootLayout"; // Import the new layout component
 import SignInPage from "./Pages/SignInPage";
 import HomePage from "./Pages/Home";
+import SignUpPage from "./Pages/SignUpPage.tsx";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
     ],
   },
   {
+    path: "/app/signup",
+    element: <SignUpPage />,
+  },
+  {
     path: "/app/signin",
     element: <SignInPage />,
   },
@@ -42,7 +47,11 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
+      <ClerkProvider
+        publishableKey={PUBLISHABLE_KEY}
+        afterSignOutUrl="/"
+        signUpForceRedirectUrl="/app"
+      >
         <RouterProvider router={router} />
       </ClerkProvider>
     </QueryClientProvider>

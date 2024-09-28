@@ -29,6 +29,7 @@ VITE_CLERK_PUBLISHABLE_KEY=
 
 Need to also include a production key in the .env.production file.
 
+There are Path variables that can be set in the dashboard to /app/signin and /app/signup
 
 ## Config
 
