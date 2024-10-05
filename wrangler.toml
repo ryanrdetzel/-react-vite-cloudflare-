@@ -1,9 +1,3 @@
 name = "react-vite-cloudflare-template"
 pages_build_output_dir = "./dist"
 compatibility_date = "2024-06-01"
-
-[vars]
-VITE_CLERK_PUBLISHABLE_KEY=""
-
-[env.production.vars]
-VITE_CLERK_PUBLISHABLE_KEY="Q"

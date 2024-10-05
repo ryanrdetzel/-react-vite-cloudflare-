@@ -1,9 +1,6 @@
 import { useApiFetch } from "../hooks/useApiFetch";
 import { useQuery } from "@tanstack/react-query";
-
-export interface CustomError extends Error {
-  status?: number;
-}
+import { CustomError } from "../types";
 
 export function useSessionQuery() {
   const { fetchWithToken } = useApiFetch();
@@ -22,7 +19,7 @@ export function useSessionQuery() {
       return response.json();
     },
     retry: (retryCount, error: CustomError) => {
-      if (error instanceof Error && error.status === 401) {
+      if (error && error.status === 401) {
         return false; // Do not retry on 401
       }
       console.log(retryCount);

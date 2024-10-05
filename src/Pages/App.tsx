@@ -1,41 +1,34 @@
-import { useSessionQuery, CustomError } from "../apis/session";
-import { useNavigate } from "react-router-dom";
+import { useSession } from "../hooks/useSession";
 
-import { useEffect } from "react";
+import React from "react";
 
-type UserType = {
-  email: string;
-};
+const App: React.FC = () => {
+  const { user } = useSession();
 
-interface SessionQueryResult {
-  data: UserType;
-  isLoading: boolean;
-  isError: boolean;
-  error: CustomError | null;
-}
-
-function App() {
-  const navigate = useNavigate();
-  const { data, isError, error } = useSessionQuery() as SessionQueryResult;
-
-  useEffect(() => {
-    if (isError && error?.status === 401) {
-      navigate("/app/signin");
+  const handleLogout = async () => {
+    try {
+      await fetch("/auth/logout", { method: "POST" });
+      window.location.href = "/app/signin";
+    } catch (error) {
+      console.error("Logout failed:", error);
     }
-  }, [isError, error, navigate]);
+  };
 
-  if (!data) {
+  if (!user) {
     return null;
   }
-
   return (
     <>
-      <h1 className="text-3xl font-bold">Basic React Vite Tailwind App</h1>
-      <ul>
-        <li>Email: {data.email}</li>
-      </ul>
+      <h1 className="text-3xl font-bold">Welcome Home</h1>
+      Email: {user.email}{" "}
+      <span
+        className="underline cursor-pointer text-primary hover:text-primary/80"
+        onClick={handleLogout}
+      >
+        Logout
+      </span>
     </>
   );
-}
+};
 
 export default App;

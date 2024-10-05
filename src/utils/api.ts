@@ -1,22 +1,28 @@
-type FetchOptions = Omit<RequestInit, "headers"> & {
+export type FetchOptions = Omit<RequestInit, "headers"> & {
   headers?: HeadersInit;
-  token: string | null;
+  token?: string;
+  queryParams?: Record<string, string>;
 };
 
 export const API_URL = import.meta.env.VITE_API_URL;
-
+console.log(API_URL);
 export const apiFetch = async (
   endpoint: string,
-  options: FetchOptions = { token: null }
+  options: FetchOptions = {}
 ): Promise<Response> => {
-  const { token, headers: customHeaders, ...restOptions } = options;
+  const { headers: customHeaders, queryParams, ...restOptions } = options;
   const headers = new Headers(customHeaders);
 
-  if (token) {
-    headers.set("Authorization", `Bearer ${token}`);
+  let url = `${API_URL}${endpoint}`;
+
+  if (queryParams && Object.keys(queryParams).length > 0) {
+    const searchParams = new URLSearchParams();
+    for (const [key, value] of Object.entries(queryParams)) {
+      searchParams.append(key, value);
+    }
+    url += (url.includes("?") ? "&" : "?") + searchParams.toString();
   }
 
-  const url = `${API_URL}${endpoint}`;
   const response = await fetch(url, {
     ...restOptions,
     headers,

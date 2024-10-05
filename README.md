@@ -18,14 +18,6 @@ npm i
 ```
 ## Env
 
-Create a new app in clerk and add the publishable key to the .env.local file
-
-```
-.env.local
-VITE_CLERK_PUBLISHABLE_KEY=
-```
-
-Need to also include a production key in the .env.production file.
 
 ## Run dev mode locally 
 npx vite dev
